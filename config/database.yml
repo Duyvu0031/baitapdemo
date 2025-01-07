@@ -35,7 +35,7 @@ production:
     pool: 5
     port: 5432
     host: dpg-ctulacrqf0us73f5sh7g-a.oregon-postgres.render.com
-    password: <%= ENV["MYSITE_DATABASE_PASSWORD"] %>
+    password: Ugi3UVBBnvjySPSqLWhjwvVD9ULOyK0h
   cache:
     <<: *primary_production
     database: mysite_production_cache
