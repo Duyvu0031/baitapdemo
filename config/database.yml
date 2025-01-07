@@ -12,7 +12,6 @@ development:
   database: mysite_development
   username: postgres
   password: "1234"
-  host: localhost
   port: 5432
 
   
@@ -22,7 +21,6 @@ test:
   database: mysite_test
   username: postgres
   password: "1234"
-  host: localhost
   port: 5432
   
 
@@ -31,8 +29,12 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: mysite_production
+    encoding: unicode
+    database: mysite_ah7y
     username: mysite
+    pool: 5
+    port: 5432
+    host: dpg-ctulacrqf0us73f5sh7g-a.oregon-postgres.render.com
     password: <%= ENV["MYSITE_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
