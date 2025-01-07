@@ -1,0 +1,24 @@
+<%= form_with model: product do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div style="width: 100%; max-width: 600px; padding: 10px;">
+  <%= form.label :description, style: "display: block; margin-bottom: 5px;" %>
+  <%= form.rich_text_area :description, style: "width: 100%; height: 200px;" %>
+</div>
+
+  <div>
+    <%= form.label :featured_image, style: "display: block" %>
+    <%= form.file_field :featured_image, accept: "image/*" %>
+  </div>
+  <div>
+    <%= form.label :inventory_count, style: "display: block" %>
+    <%= form.number_field :inventory_count %>
+  </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
