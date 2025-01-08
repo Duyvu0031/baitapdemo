@@ -14,6 +14,9 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: "Bạn không có quyền chỉnh sửa tài khoản này."
     end
   end
+  def new
+    @user = User.new  # Khởi tạo đối tượng @user để sử dụng trong form
+  end
   def show
     @user = User.find(params[:id])
   end

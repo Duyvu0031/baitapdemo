@@ -15,17 +15,19 @@
       background-color: #ffffff;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       margin-top: 100px;
     }
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
       color: #333;
+      margin-bottom: 30px;
     }
     .form-label {
       font-size: 1.1rem;
       font-weight: 600;
+      color: #555;
     }
     .form-control {
       border-radius: 10px;
@@ -69,7 +71,7 @@
 <body>
 
 <div class="container">
-  <h1 class="text-center mb-4">Sign In</h1>
+  <h1 class="text-center">ĐĂNG NHẬP</h1>
 
   <% if flash[:alert] %>
     <div class="alert">
@@ -79,27 +81,27 @@
 
   <%= form_with url: session_path, local: true do |form| %>
     <div class="mb-3">
-      <%= form.label :email_address, "Email Address", class: "form-label" %>
+      <%= form.label :email_address, "Địa Chỉ Email", class: "form-label" %>
       <%= form.email_field :email_address, class: "form-control", required: true, autofocus: true %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :password, "Password", class: "form-label" %>
+      <%= form.label :password, "Mật Khẩu", class: "form-label" %>
       <%= form.password_field :password, class: "form-control", required: true %>
     </div>
 
     <div class="text-center">
-      <%= form.submit "Sign In", class: "btn btn-primary" %>
+      <%= form.submit "Đăng Nhập", class: "btn btn-primary" %>
     </div>
   <% end %>
 
-  <div class="text-center mt-4">
-  <%= link_to "Forgot password?", new_password_path, class: "btn btn-link" %>
-</div>
+  <div class="text-center mt-3">
+    <%= link_to "Quên Mật Khẩu?", new_password_path, class: "btn btn-link" %>
+  </div>
 
-  <div class="text-center mt-4">
-  <%= link_to "Tạo Tài Khoản", new_user_path, class: "btn btn-link" %>
-</div>
+  <div class="text-center mt-3">
+    <%= link_to "Tạo Tài Khoản", new_user_path, class: "btn btn-link" %>
+  </div>
 
 </div>
 

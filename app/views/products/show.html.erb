@@ -1,13 +1,118 @@
-<% cache @product do %>
-    <h1><%= @product.name %></h1>
-    <%= @product.description %>
-    <%= image_tag @product.featured_image if @product.featured_image.attached? %>
-    <%= render "inventory", product: @product %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @product.name %></title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+    .product-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #007bff;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeIn 1s ease;
+    }
+    .product-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease 0.5s forwards;
+    }
+    .product-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease 1s forwards;
+    }
+    .inventory-info {
+      font-size: 1.1rem;
+      color: #555;
+      font-weight: bold;
+      text-align: center;
+    }
+    .product-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+    .product-links a, .product-links button {
+      padding: 10px 20px;
+      border-radius: 50px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .product-links a:hover, .product-links button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
 
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container product-container">
+  <% cache @product do %>
+    <h1><%= @product.name %></h1>
+    <div class="product-description">
+      <%= @product.description %>
+    </div>
+    <%= image_tag @product.featured_image, class: "product-image" if @product.featured_image.attached? %>
+    <%= render "inventory", product: @product %>
   <% end %>
 
-<%= link_to "Back", products_path %>
-<% if authenticated? %>
-  <%= link_to "Edit", edit_product_path(@product) %>
-  <%= button_to "Destroy", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+  <div class="product-links">
+    <%= link_to "Back", products_path, class: "btn btn-link" %>
+    
+    <% if authenticated? %>
+      <div>
+        <%= link_to "Edit", edit_product_path(@product), class: "btn btn-link" %>
+        <%= button_to "Destroy", @product, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

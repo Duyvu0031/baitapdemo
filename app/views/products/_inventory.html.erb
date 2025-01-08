@@ -1,11 +1,95 @@
-<% if product.inventory_count? %>
-  <p><%= product.inventory_count %> in stock</p>
-<% else %>
-  <p>Out of stock</p>
-  <p>Email me when available.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Availability</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      max-width: 700px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    .product-status {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+    .out-of-stock {
+      color: #e74c3c;
+      font-size: 1.2rem;
+    }
+    .email-notify {
+      font-size: 1.1rem;
+      margin-top: 20px;
+    }
+    .form-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #555;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+    }
+    .form-submit {
+      background-color: #007bff;
+      color: white;
+      font-size: 1.2rem;
+      width: 100%;
+      border-radius: 50px;
+      padding: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .form-submit:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
 
-  <%= form_with model: [product, Subscriber.new] do |form| %>
-    <%= form.email_field :email, placeholder: "you@example.com", required: true %>
-    <%= form.submit "Submit" %>
+<div class="container">
+  <h1>Product Availability</h1>
+
+  <% if product.inventory_count? %>
+    <p class="product-status"><%= product.inventory_count %> in stock</p>
+  <% else %>
+    <p class="out-of-stock">Out of stock</p>
+    <p class="email-notify">Email me when available.</p>
+
+    <%= form_with model: [product, Subscriber.new], local: true do |form| %>
+      <div class="form-group">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control", placeholder: "you@example.com", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "Submit", class: "form-submit" %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
