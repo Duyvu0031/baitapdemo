@@ -1,38 +1,32 @@
 Rails.application.routes.draw do
-  resource :session
-  resources :passwords, param: :token
+  get "users/index"
+  
+  # Route cho đăng nhập và đăng ký
+  resource :session, only: [:new, :create, :destroy]  # Dùng cho đăng nhập, tạo session, và logout
+  resources :users, only: [:new, :create] 
+  # Route cho người dùng (tạo, chỉnh sửa, xóa, v.v.)
+  resources :users, except: [:new, :create]  # Để lại các route như index, edit, update, destroy, show
 
+  # Định nghĩa các route cho mật khẩu
+  resources :passwords, param: :token, only: [:new, :create, :edit, :update]
+
+  # Định nghĩa các route cho sản phẩm
   resources :products do
-    resources :subscribers, only: [ :create ]
-    resource :unsubscribe, only: [ :show ]
+    collection do
+      get 'all_products', to: 'products#all_products'
+    end
+  
+    resources :subscribers, only: [:create]
+    resource :unsubscribe, only: [:show]
+    resources :orders, only: [:show]
   end
 
+  # Route cho trang chi tiết sản phẩm (chi tiết riêng cho từng sản phẩm)
+  get 'products/details', to: 'products#details', as: 'products_details'
 
-  get "render/index"
-  get "/products", to: "products#index"
-
-get "/products/new", to: "products#new"
-post "/products", to: "products#create"
-
-get "/products/:id", to: "products#show"
-
-get "/products/:id/edit", to: "products#edit"
-patch "/products/:id", to: "products#update"
-put "/products/:id", to: "products#update"
-
-delete "/products/:id", to: "products#destroy"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Kiểm tra trạng thái ứng dụng
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  
+  # Trang chủ
   root "products#index"
-
 end

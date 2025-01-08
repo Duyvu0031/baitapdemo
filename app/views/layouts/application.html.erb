@@ -28,6 +28,8 @@
   <body>
   <nav>
   <%= link_to "Home", root_path %>
+
+  <%= link_to "Xem sản phẩm", product_order_path(@product, @order) if @product && @order %>
   <%= button_to "Log out", session_path, method: :delete if authenticated? %>
 </nav>
 <div class="notice"><%= notice %></div>

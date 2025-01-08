@@ -3,8 +3,14 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   def index
     @products = Product.all
+     
   end
+  def all_products
+    @products = Product.all  # Lấy tất cả sản phẩm
+  end
+
   def show
+    @product = Product.find(params[:id]) # Đảm bảo lấy đúng sản phẩm
     
   end
   def new

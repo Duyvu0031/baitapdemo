@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <!-- Thêm liên kết đến Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group .form-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+    }
+
+    .form-control-file {
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .form-control:focus, .form-control-file:focus {
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+    }
+
+    .form-group input[type="file"] {
+      cursor: pointer;
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .form-group input[type="file"]:hover {
+      background-color: #e2e6ea;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center my-4">Product Details</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <% @products.each do |product| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <% if product.featured_image.attached? %>
+              <img src="<%= url_for(product.featured_image) %>" class="card-img-top" alt="<%= product.name %>">
+            <% else %>
+              <p class="text-center">No image available</p>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= product.description %></p>
+              <div class="text-center">
+                <%= link_to 'View Details', product_path(product), class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Thêm liên kết đến Bootstrap JS và jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

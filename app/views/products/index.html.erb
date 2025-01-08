@@ -1,15 +1,60 @@
-<h1><%= t ".xin chào" %></h1>
+<!-- app/views/products/index.html.erb -->
 
-<h1>Products</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh Sách Sản Phẩm</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, product %>
-      </a>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Danh Sách Sản Phẩm</h2>
+
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tên Sản Phẩm</th>
+          <th scope="col">Hành Động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each_with_index do |product, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= product.name %></td>
+            <td>
+               <%= link_to 'Xem', product_path(product), class: "btn btn-warning btn-sm" %>
+
+                
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Nút "Thêm Sản Phẩm Mới" -->
+    <div class="text-center">
+      <%= link_to "Thêm Sản Phẩm Mới", new_product_path, class: "btn btn-success" %>
     </div>
-  <% end %>
-  <%= link_to "New product", new_product_path if authenticated? %>
-  <%= link_to "Login", new_session_path unless authenticated? %>
 
-</div>
+    <!-- Nút "Xem Tất Cả Sản Phẩm" -->
+    <div class="text-center mt-4">
+    <%= link_to "Xem Tất Cả Sản Phẩm", all_products_products_path, class: "btn btn-info" %>
+    </div>
+    <% if current_user %>
+      <div class="text-center mt-4">
+        <%= link_to "Quản lý tài khoản", edit_user_path(current_user), class: "btn btn-link" %>
+      </div>
+    <% end %>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

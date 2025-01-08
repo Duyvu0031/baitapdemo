@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       end
     end
   end
+  
 
   def create
     if user = User.authenticate_by(email_address: params[:email_address], password: params[:password])
@@ -23,9 +24,10 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+  
 
   def destroy
-    terminate_session
+    # terminate_session
     session[:user_id] = nil # Xóa thông tin người dùng khỏi session khi đăng xuất
     redirect_to new_session_path,notice: "Đã đăng xuất thành công"
   end

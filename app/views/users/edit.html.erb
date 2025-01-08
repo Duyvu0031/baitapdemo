@@ -1,0 +1,30 @@
+<h1>Edit Account</h1>
+
+<%= form_with model: @user, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :email_address, "Email Address" %>
+    <%= form.email_field :email_address, class: "form-control", readonly: @user != current_user %> <!-- Ngừng chỉnh sửa email nếu không phải là người dùng hiện tại -->
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :password_confirmation, "Password Confirmation" %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Save Changes", class: "btn btn-primary" %>
+<% end %>
