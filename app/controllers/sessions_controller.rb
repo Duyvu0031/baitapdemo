@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if user = User.authenticate_by(email_address: params[:email_address], password: params[:password])
       start_new_session_for user
       session[:user_id] = user.id
-      redirect_to after_authentication_url, notice: "chào mừng bạn: #{user.email_address}!"
+      redirect_to all_products_products_path, notice: "Đăng nhập thành công! #{user.email_address}!"
     else
       flash.now[:alert] = "Email hoặc mật khẩu không hợp lệ"
       render :new

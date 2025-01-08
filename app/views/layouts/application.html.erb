@@ -20,33 +20,111 @@
   <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag "trix" %>
   <%= javascript_include_tag "trix" %>
-  
+
+  <!-- FontAwesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+    }
+    .navbar {
+      border-bottom: 2px solid #f1f1f1;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .nav-link {
+      font-weight: 500;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      background-color: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .btn-logout {
+      font-weight: 500;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 2px solid #dc3545;
+      color: #dc3545;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background-color: #dc3545;
+      color: white;
+      border-color: #dc3545;
+    }
+
+    .btn-logout i {
+      margin-right: 8px;
+    }
+
+    .container {
+      margin-top: 30px;
+    }
+    .alert {
+      font-size: 1.1rem;
+      border-radius: 5px;
+    }
+    footer {
+      background-color: #212529;
+      padding: 20px;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    footer p {
+      margin: 0;
+    }
+  </style>
 </head>
 
-<body class="bg-light">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <%= link_to "Home", root_path, class: "navbar-brand" %>
-      
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <%= link_to "Trang Chủ", all_products_products_path, class: "navbar-brand" %>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <% if current_user %>
+          <!-- Dòng chào mừng -->
           <li class="nav-item">
-            <%= link_to "Xem sản phẩm", product_order_path(@product, @order), class: "nav-link" if @product && @order %>
+            <span class="navbar-text text-white">
+              Chào mừng, <%= current_user.email_address || "Người dùng" %>!
+            </span>
           </li>
 
-          <% if current_user %>
-            <li class="nav-item">
-              <%= button_to "Log out", session_path, method: :delete, class: "nav-link btn btn-link" %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+          <!-- Nút Tài Khoản -->
+          <li class="nav-item">
+            <%= link_to "Tài Khoản", root_path, class: "nav-link" %>
+          </li>
+
+          <!-- Nút Đăng Xuất -->
+          <li class="nav-item">
+            <%= button_to session_path, method: :delete, class: "nav-link btn-logout" do %>
+              <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   <!-- Notice -->
-  <div class="container mt-4">
+  <div class="container">
     <div class="alert alert-info">
       <%= notice %>
     </div>
@@ -59,9 +137,9 @@
     </div>
   </main>
 
-  <!-- Footer (Optional) -->
-  <footer class="bg-dark text-white text-center py-4 mt-5">
-    <p>&copy; 2025 Thiết Kế Và Phát Triển Webstite Mã Nguồn Mở. Bài Cuối KỲ[Tùng Duy - DH21LT].</p>
+  <!-- Footer -->
+  <footer class="text-center">
+    <p>&copy; 2025 Thiết Kế Và Phát Triển Webstite Mã Nguồn Mở. Bài Cuối Kỳ [Tùng Duy - DH21LT].</p>
   </footer>
 
   <!-- Bootstrap JS and dependencies -->

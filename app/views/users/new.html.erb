@@ -71,7 +71,7 @@
 <body>
 
 <div class="container">
-  <h1 class="text-center">Sign Up</h1>
+  <h1 class="text-center">Đăng Ký</h1>
 
   <% if @user.errors.any? %>
     <div class="alert">
@@ -86,27 +86,27 @@
 
   <%= form_with model: @user, local: true do |form| %>
     <div class="mb-3">
-      <%= form.label :email_address, "Email Address", class: "form-label" %>
+      <%= form.label :email_address, "Địa Chỉ Email", class: "form-label" %>
       <%= form.email_field :email_address, class: "form-control", required: true, autofocus: true %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :password, "Password", class: "form-label" %>
+      <%= form.label :password, " Mật Khẩu", class: "form-label" %>
       <%= form.password_field :password, class: "form-control", required: true %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :password_confirmation, "Confirm Password", class: "form-label" %>
+      <%= form.label :password_confirmation, "Xác Nhận Mật Khẩu", class: "form-label" %>
       <%= form.password_field :password_confirmation, class: "form-control", required: true %>
     </div>
 
     <div class="text-center">
-      <%= form.submit "Sign Up", class: "btn btn-primary" %>
+      <%= form.submit "Đăng Kí", class: "btn btn-primary" %>
     </div>
   <% end %>
 
   <div class="text-center mt-4">
-    <%= link_to "Back to Login", new_session_path, class: "btn btn-link" %>
+    <%= link_to "Trở Lại Đăng Nhập", new_session_path, class: "btn btn-link" %>
   </div>
 </div>
 

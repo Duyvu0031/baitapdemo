@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'login', to: 'sessions#new', as: 'login'
   # Route cho người dùng và phiên đăng nhập
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :edit, :update, :destroy, :show]

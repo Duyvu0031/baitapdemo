@@ -1,2 +1,23 @@
-<h1>Users#create</h1>
-<p>Find me in app/views/users/create.html.erb</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Created</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5 text-center">Account Created Successfully</h1>
+    <p class="text-center">Thank you for registering with us!</p>
+    <div class="text-center">
+      <%= link_to 'Go to Login Page', login_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  
+  <!-- Thêm liên kết đến Bootstrap JS và jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

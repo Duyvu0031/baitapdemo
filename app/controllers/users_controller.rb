@@ -20,6 +20,22 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+  def create
+    @user = User.find_or_initialize_by(email_address: user_params[:email_address])
+  
+    if @user.new_record?
+      if @user.update(user_params)  # Thử cập nhật nếu là bản ghi mới
+        flash[:notice] = "Account created successfully!"
+        redirect_to login_path
+      else
+        render :new
+      end
+    else
+      flash[:alert] = "Email already exists."
+      render :new
+    end
+  end
+  
   
   
   def destroy
