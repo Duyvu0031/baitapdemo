@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       begin
         User.create!(email_address: "duy0031@gmail.com", password: "duy0031")
       rescue ActiveRecord::RecordInvalid => e
-        logger.error "Failed to create admin user: #{e.message}"
+        logger.error "Không tạo được người dùng quản trị: #{e.message}"
       end
     end
   end
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if user = User.authenticate_by(email_address: params[:email_address], password: params[:password])
       start_new_session_for user
       session[:user_id] = user.id
-      redirect_to all_products_products_path, notice: "Đăng nhập thành công! #{user.email_address}!"
+      redirect_to all_products_products_path, notice: "Đăng nhập thành công!"
     else
       flash.now[:alert] = "Email hoặc mật khẩu không hợp lệ"
       render :new
@@ -30,5 +30,8 @@ class SessionsController < ApplicationController
     # terminate_session
     session[:user_id] = nil # Xóa thông tin người dùng khỏi session khi đăng xuất
     redirect_to new_session_path,notice: "Đã đăng xuất thành công"
+  end
+  def admin?
+    current_user&.email_address == "duy0031@gmail.com" # Kiểm tra xem người dùng có phải là admin không
   end
 end

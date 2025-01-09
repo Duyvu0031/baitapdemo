@@ -1,6 +1,96 @@
-<h1>User Details</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Tin Người Dùng</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<p>Email Address: <%= @user.email_address %></p>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
+    }
 
-<%= link_to "Back to Users List", users_path, class: "btn btn-primary" %>
-<%= link_to "Delete Account", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete this account?" }, class: "btn btn-danger" %>
+    .user-info-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #343a40;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border: none;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="user-info-container">
+      <h1>Thông Tin Người Dùng</h1>
+
+      <p><strong>Tên Tài Khoản Email:</strong> <%= @user.email_address %></p>
+
+      <div class="btn-container">
+        <!-- Nút Trở Về -->
+        <%= link_to "Trở về Danh Sách", users_path, class: "btn btn-primary mx-2" %>
+
+        
+        <% if current_user.email_address == "duy0031@gmail.com" && @user != current_user %>
+          <%= link_to 'Xóa Vĩnh Viễn', user_path(@user), method: :delete, data: { confirm: 'Bạn có chắc chắn muốn xóa tài khoản này vĩnh viễn?' }, class: 'btn btn-danger' %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

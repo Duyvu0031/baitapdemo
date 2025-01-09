@@ -6,17 +6,27 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   # before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   def index
-    @products = Product.all
-     
+    
+    if current_user
+      @products = Product.all
+    else
+      redirect_to login_path, alert: "Bạn cần đăng nhập để xem sản phẩm."
+    end
   end
+
+    
   def all_products
     @products = Product.all 
     
   end
 
   def show
-    
+    @product = set_product  # Sử dụng method set_product đã định nghĩa trong before_action
+  if @product.nil?
+    redirect_to root_path, alert: "Sản phẩm không tồn tại."
   end
+  end
+
   
   def new
     @product = Product.new
@@ -54,6 +64,6 @@ class ProductsController < ApplicationController
     end
   end
     def product_params
-      params.expect(product: [ :name, :description, :featured_image, :inventory_count ])
+      params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
     end
 end

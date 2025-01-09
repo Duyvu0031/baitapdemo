@@ -5,7 +5,17 @@ class UsersController < ApplicationController
   def index
     @users = User.where.not(email_address: "duy0031@gmail.com")  # Loại bỏ admin khỏi danh sách
   end
-  
+  def destroy
+    @user = User.find(params[:id])
+
+    # Kiểm tra nếu người dùng không phải là admin hoặc là người dùng hiện tại
+    if @user == current_user || @user.email_address == "duy0031@gmail.com"
+      redirect_to user_path, alert: "Không thể xóa tài khoản này."
+    else
+      @user.destroy
+      redirect_to user_path, notice: "Tài khoản đã bị xóa."
+    end
+  end
 
   def edit
     @user = User.find(params[:id])  # Lấy người dùng dựa trên id trong params
@@ -25,33 +35,14 @@ class UsersController < ApplicationController
   
     if @user.new_record?
       if @user.update(user_params)  # Thử cập nhật nếu là bản ghi mới
-        flash[:notice] = "Account created successfully!"
+        flash[:notice] = "Tài khoản đã được tạo thành công!!"
         redirect_to login_path
       else
         render :new
       end
     else
-      flash[:alert] = "Email already exists."
+      flash[:alert] = "Email đã tồn tại."
       render :new
-    end
-  end
-  
-  
-  
-  def destroy
-    @user = User.find_by(id: params[:id])
-    
-    if @user.nil?
-      redirect_to users_path, alert: "Người dùng không tồn tại."
-      return
-    end
-  
-    # Kiểm tra nếu người dùng không phải là admin
-    if @user.email_address != "duy0031@gmail.com"
-      @user.destroy
-      redirect_to users_path, notice: "Tài khoản đã bị xóa."
-    else
-      redirect_to users_path, alert: "Không thể xóa tài khoản admin."
     end
   end
   

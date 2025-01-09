@@ -1,4 +1,114 @@
-<h1>New product</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Sản Phẩm Mới</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
 
-<%= render "form", product: @product %>
-<%= link_to "Cancel", products_path %>
+    .add-product-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #007bff;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+    }
+
+    .form-container input, .form-container select, .form-container textarea {
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-container input:focus, .form-container select:focus, .form-container textarea:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-container .btn {
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-save {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-save:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+
+    .btn-cancel {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-cancel:hover {
+      background-color: #c82333;
+      transform: scale(1.05);
+    }
+
+    .btn-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container add-product-container">
+  <h1>Thêm Sản Phẩm Mới</h1>
+  
+  <%= render "form", product: @product %>
+
+  <div class="btn-container">
+    <%= link_to "Cancel", products_path, class: "btn btn-cancel" %>
+    
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <title><%= content_for(:title) || "Mysite" %></title>
+  <title><%= content_for(:title) || "Tùng Duy" %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
   <%= yield :head %>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/icon.png" type="image/png">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/icon.png">
-
+<link rel="icon" href="/apple.png" type="image/png">
+<link rel="icon" href="/carrot.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/carrot.png">
   <!-- Bootstrap CSS -->
   <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag "trix" %>
@@ -25,11 +24,14 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <style>
-    body {
-      background-color: #f4f6f9;
-      font-family: 'Roboto', sans-serif;
-      color: #333;
-    }
+  body {
+    background-color: #f4f6f9;
+    font-family: 'Roboto', sans-serif;
+    color: black; 
+  }
+  .navbar-text {
+    color: orange !important; /* Đặt màu chữ thành cam */
+  }
     .navbar {
       border-bottom: 2px solid #f1f1f1;
     }
@@ -74,19 +76,28 @@
     .container {
       margin-top: 30px;
     }
-    .alert {
-      font-size: 1.1rem;
-      border-radius: 5px;
-    }
+    .navbar-text,
+.navbar-brand {
+  color: black !important; 
+}
+    
+.nav-link, 
+.btn-logout, 
+footer, 
+footer p, 
+.alert {
+  color: black !important;
+}
     footer {
       background-color: #212529;
       padding: 20px;
       color: #fff;
       font-size: 0.9rem;
     }
-    footer p {
+    footer, footer p {
       margin: 0;
-    }
+  color: white !important; /* Đặt màu trắng và dùng !important để ưu tiên */
+}
   </style>
 </head>
 
@@ -100,9 +111,9 @@
         <% if current_user %>
           <!-- Dòng chào mừng -->
           <li class="nav-item">
-            <span class="navbar-text text-white">
-              Chào mừng, <%= current_user.email_address || "Người dùng" %>!
-            </span>
+            <span class="navbar-text">
+    Chào mừng, <%= current_user.email_address || "Người dùng" %>!
+  </span>
           </li>
 
           <!-- Nút Tài Khoản -->

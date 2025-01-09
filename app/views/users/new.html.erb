@@ -75,7 +75,7 @@
 
   <% if @user.errors.any? %>
     <div class="alert">
-      <h4>There were errors with your submission:</h4>
+      <h4>Có lỗi xảy ra trong quá trình đăng ký:</h4>
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -91,13 +91,23 @@
     </div>
 
     <div class="mb-3">
-      <%= form.label :password, " Mật Khẩu", class: "form-label" %>
+      <%= form.label :password, "Mật Khẩu", class: "form-label" %>
       <%= form.password_field :password, class: "form-control", required: true %>
+      <% if @user.errors[:password].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:password].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="mb-3">
       <%= form.label :password_confirmation, "Xác Nhận Mật Khẩu", class: "form-label" %>
       <%= form.password_field :password_confirmation, class: "form-control", required: true %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:password_confirmation].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="text-center">

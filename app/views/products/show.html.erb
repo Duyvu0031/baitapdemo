@@ -11,6 +11,7 @@
       font-family: 'Arial', sans-serif;
       color: #333;
     }
+
     .product-container {
       max-width: 800px;
       margin: 50px auto;
@@ -20,10 +21,12 @@
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .product-container:hover {
       transform: translateY(-10px);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
     }
+
     h1 {
       font-size: 2.5rem;
       color: #007bff;
@@ -34,6 +37,7 @@
       letter-spacing: 2px;
       animation: fadeIn 1s ease;
     }
+
     .product-description {
       font-size: 1.1rem;
       line-height: 1.6;
@@ -42,6 +46,7 @@
       opacity: 0;
       animation: fadeInUp 1.5s ease 0.5s forwards;
     }
+
     .product-image {
       width: 100%;
       height: auto;
@@ -50,18 +55,21 @@
       opacity: 0;
       animation: fadeInUp 1.5s ease 1s forwards;
     }
+
     .inventory-info {
       font-size: 1.1rem;
       color: #555;
       font-weight: bold;
       text-align: center;
     }
+
     .product-links {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 30px;
     }
+
     .product-links a, .product-links button {
       padding: 10px 20px;
       border-radius: 50px;
@@ -69,10 +77,29 @@
       color: white;
       text-decoration: none;
       transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .product-links a:hover, .product-links button:hover {
       background-color: #0056b3;
       transform: scale(1.05);
+    }
+
+    .product-links .btn-link {
+      background-color: transparent;
+      color: #007bff;
+      text-decoration: underline;
+      border: none;
+      padding: 0;
+    }
+
+    .product-links .btn-link:hover {
+      color: #0056b3;
     }
 
     @keyframes fadeIn {
@@ -99,12 +126,12 @@
   <% end %>
 
   <div class="product-links">
-    <%= link_to "Back", products_path, class: "btn btn-link" %>
+    <%= link_to "Trở Về", products_path, class: "btn btn-link" %>
     
     <% if authenticated? %>
       <div>
-        <%= link_to "Edit", edit_product_path(@product), class: "btn btn-link" %>
-        <%= button_to "Destroy", @product, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link" %>
+        <%= link_to "Sửa", edit_product_path(@product), class: "btn btn-link" %>
+        <%= button_to "Xóa", @product, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link" %>
       </div>
     <% end %>
   </div>

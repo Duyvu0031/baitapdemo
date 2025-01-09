@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Các Sản Phẩm</title>
+  
   <!-- Thêm liên kết đến Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
   <style>
     body {
-      background-color: #f0f2f5;
+      background-color: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
     }
 
     .container {
@@ -29,6 +32,9 @@
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-card:hover {
@@ -38,7 +44,7 @@
 
     .product-image {
       width: 100%;
-      height: 250px;
+      height: 300px;
       object-fit: cover;
       transition: transform 0.3s ease;
     }
@@ -49,6 +55,10 @@
 
     .card-body {
       padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card-title {
@@ -62,6 +72,15 @@
       font-size: 1rem;
       color: #666;
       margin-bottom: 20px;
+      flex-grow: 1;
+      height: 100px; /* Đảm bảo chiều cao không quá dài */
+      overflow: hidden; /* Ẩn phần thừa */
+      text-overflow: ellipsis; /* Hiển thị ba dấu chấm khi có quá dài */
+    }
+
+    .card-text.full-description {
+      height: auto; /* Hiển thị đầy đủ khi có lớp "full-description" */
+      overflow: visible;
     }
 
     .btn-view-details {
@@ -72,10 +91,27 @@
       font-size: 1.1rem;
       text-transform: uppercase;
       transition: background-color 0.3s ease;
+      align-self: center;
     }
 
     .btn-view-details:hover {
       background-color: #0056b3;
+    }
+
+    .btn-read-more {
+      background-color: transparent;
+      color: #007bff;
+      border: none;
+      font-size: 1rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Thiết kế lại layout kệ sách */
+    .row-cols-4 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
   </style>
@@ -84,7 +120,7 @@
 
   <div class="container">
     <h1>Các Sản Phẩm</h1>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <div class="row row-cols-4">
       <% @products.each do |product| %>
         <div class="col">
           <div class="product-card">
@@ -95,9 +131,14 @@
             <% end %>
             <div class="card-body">
               <h5 class="card-title"><%= product.name %></h5>
-              <p class="card-text"><%= product.description %></p>
+              <p class="card-text <%= 'full-description' if product.description.to_plain_text.length > 100 %>">
+                <%= truncate(product.description.to_plain_text, length: 100) %>
+              </p>
+              <% if product.description.to_plain_text.length > 100 %>
+                <button class="btn-read-more" onclick="toggleDescription(this)">Đọc thêm</button>
+              <% end %>
               <div class="text-center">
-                <%= link_to 'View Details', product_path(product), class: "btn-view-details" %>
+                <%= link_to 'Xem Chi Tiết', product_path(product), class: "btn-view-details" %>
               </div>
             </div>
           </div>
@@ -110,6 +151,18 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function toggleDescription(button) {
+      var description = button.previousElementSibling;
+      description.classList.toggle('full-description');
+      if (description.classList.contains('full-description')) {
+        button.innerText = 'Đọc thêm';
+      } else {
+        button.innerText = 'Thu gọn';
+      }
+    }
+  </script>
 
 </body>
 </html>

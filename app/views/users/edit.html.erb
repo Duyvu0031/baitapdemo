@@ -93,7 +93,7 @@
 
   <%= form_with model: @user, local: true do |form| %>
     <div class="mb-3">
-      <%= form.label :email_address, "Email Address", class: "form-label" %>
+      <%= form.label :email_address, "Tên Tài Khoản Email", class: "form-label" %>
       <%= form.email_field :email_address, class: "form-control", readonly: true %> <!-- Email không thể chỉnh sửa -->
       <small>Không thể thay đổi email của bạn.</small>
     </div>
